@@ -161,6 +161,15 @@ if(OXENMQ_LOKIMQ_COMPAT)
     add_library(lokimq::lokimq ALIAS oxenmq)
 endif()
 
+find_package(pybind11)
+if(pybind11_FOUND)
+  message(STATUS "pybind11 v${pybind11_VERSION}")
+  add_subdirectory(pybind)
+else()
+  message(STATUS "did not find pybind11, not building python module")
+endif()
+
+
 export(
     TARGETS oxenmq
     NAMESPACE oxenmq::
